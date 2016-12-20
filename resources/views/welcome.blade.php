@@ -65,7 +65,7 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <!-- <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     <a href="{{ url('/login') }}">Login</a>
@@ -84,6 +84,32 @@
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
+                </div>
+            </div>
+        </div> -->
+        <div class="flex-center position-ref full-height">
+            @if (Route::has('login'))
+                <div class="top-right links">
+                    <form action="{{ route('switchLang') }}" class="form-lang" method="post">
+                        <select name="locale" onchange='this.form.submit();'>
+                            <option value="en">{{ trans('label.lang.en') }}</option>
+                            <option value="vi"{{ Lang::locale() === 'vi' ? 'selected' : '' }}>{{ trans('label.lang.vi') }}</option>
+                            <option value="jp"{{ Lang::locale() === 'jp' ? 'selected' : '' }}>{{ trans('label.lang.jp') }}</option>
+                        </select>
+                        {{ csrf_field() }}
+                    </form>
+                    <a href="{{ url('/login') }}">{{ Lang::get('label.login') }}</a>
+                    <a href="{{ url('/register') }}">{{ Lang::get('label.register') }}</a>
+                </div>
+            @endif
+
+            <div class="content">
+                <div class="title m-b-md">
+                    {{ trans('label.laravel') }}
+                </div>
+                <div class="links">
+                    <a href="https://laravel.com/docs">{{ trans('label.doc') }}</a>
+                    <a href="https://laravel-news.com">{{ trans('label.new') }}</a>
                 </div>
             </div>
         </div>
